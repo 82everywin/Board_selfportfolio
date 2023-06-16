@@ -3,8 +3,12 @@ package com.koreait.configs;
 import com.koreait.configs.interceptors.SiteConfigInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -44,5 +48,26 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**"); // 모든 URL에 해당.
     }
 
-    public MessageSource
+    /**
+     * resource-> message 에 대해서 기본 설정 함
+     * 번들(Bundle)로 묶어서 관리
+     * @return
+     */
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource ms = new ResourceBundleMessageSource();
+        ms.setDefaultEncoding("UTF-8");
+        ms.setBasenames("messages.commons","messages.validations","messages.errors");
+
+        return ms;
+    }
+
+    /**
+     * GET, POST 외에 DELETE, PATCH, PUT ..에 사용하기 위함.
+     * @return
+     */
+    @Bean
+    public HiddenHttpMethodFilter httpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
 }

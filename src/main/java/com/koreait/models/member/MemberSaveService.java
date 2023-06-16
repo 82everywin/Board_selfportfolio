@@ -20,6 +20,10 @@ public class MemberSaveService {
 
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * 기존게 없으면 추가, 있으면 수정
+     * @param joinForm
+     */
     public void save(JoinForm joinForm){
         Member member = new ModelMapper().map(joinForm,Member.class);
         member.setUserPw(passwordEncoder.encode(joinForm.getUserPw()));
