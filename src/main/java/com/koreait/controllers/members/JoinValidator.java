@@ -1,6 +1,7 @@
 package com.koreait.controllers.members;
 
 import com.koreait.commons.validators.MobileValidator;
+import com.koreait.commons.validators.PasswordValidator;
 import com.koreait.repositories.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import org.springframework.validation.Validator;
 
 @Component
 @RequiredArgsConstructor
-public class JoinValidator implements Validator , MobileValidator {
+public class JoinValidator implements Validator , MobileValidator , PasswordValidator {
     // 기본적인 검증(Validation) -> @Bean validation 이용
     // 추가적인 검증 -> Validator 이용
 
@@ -60,10 +61,9 @@ public class JoinValidator implements Validator , MobileValidator {
          *          *  - 특수문자
          */
 
-
-
-
-
+        if(userPw !=null && !userPw.isBlank() ){
+            alphaCheck(userPw,true);
+        }
 
         // 3. 비밀번호 / 비밀번호 확인 일치
         if( userPw !=null && userPwRe !=null &&
@@ -73,18 +73,16 @@ public class JoinValidator implements Validator , MobileValidator {
 
         // 4. 휴대전화번호(선택) - 입력된 경우 형식 체크
         // 5. 휴대전화번호가 입력된 경우 숫자만 추출해서 다시 joinForm 객체(커맨드 객체)에 저장
-        if(mobile !=null && !mobile.isBlank() ){
+        if(mobile !=null && !mobile.isBlank()){
             if(!mobileNumCheck(mobile)) {
                 errors.rejectValue("mobile", "Validation.mobile");
             }
 
             mobile = mobile.replaceAll("\\D","");
             joinForm.setMobile(mobile);
-
         }
 
         // 6. 필수 약관 동의 체크
-
         boolean[] agrees= joinForm.getAgrees(); // 필수 약관
 
         if(agrees !=null && agrees.length>0 ){
@@ -93,11 +91,8 @@ public class JoinValidator implements Validator , MobileValidator {
                     errors.rejectValue("mobile","Validation.joinForm.agree");
                     break;
                 }
-
             }
         }
-
-
 
     }
 }
