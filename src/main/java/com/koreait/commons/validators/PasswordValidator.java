@@ -18,6 +18,7 @@ public interface PasswordValidator {
         Pattern pattern2 = Pattern.compile("[A-Z]+");
         return pattern1.matcher(password).find() && pattern2.matcher(password).find();
     }
+
     /**
      * 숫자가 포함된 패턴인지 체크
      *
@@ -25,7 +26,7 @@ public interface PasswordValidator {
      * @return
      */
     default boolean numberCheck(String password) {
-        Pattern pattern = Pattern.compile("\\d+");
+        Pattern pattern = Pattern.compile("\\d+"); // [0-9]
         Matcher matcher = pattern.matcher(password);
         return matcher.find();
     }
