@@ -61,8 +61,10 @@ public class JoinValidator implements Validator , MobileValidator , PasswordVali
          *          *  - 특수문자
          */
 
-        if(userPw !=null && !userPw.isBlank() ){
-            alphaCheck(userPw,true);
+        if(userPw !=null && !userPw.isBlank()
+         && (!alphaCheck(userPw,false) || !numberCheck(userPw)
+         || !specialCharsCheck(userPw))){
+            errors.rejectValue("userPw","Validation.complexity.password");
         }
 
         // 3. 비밀번호 / 비밀번호 확인 일치
