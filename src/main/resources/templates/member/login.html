@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/front/main}">
+      layout:decorate="~{layouts/front/main}">
     <main layout:fragment="content">
         <form method="post" name="frmLogin" th:action="@{/member/login}" autocomplete="off">
             <div>
@@ -14,9 +14,9 @@
                 <button type="submit" th:text="#{member.action.login}"></button>
             </div>
             <div>
-                <a th:href="@{/member/find_id}">[[#{findId}]]</a>
-                <a th:href="@{/member/find_pw}">[[#{findPw}]]</a>
-                <a th:href="@{/member/join}">[[#{member.join}]]</a>
+                <a th:href="@{/member/find_id}"><i class="xi-search"></i>[[#{findId}]]</a>
+                <a th:href="@{/member/find_pw}"><i class="xi-key"></i>[[#{findPw}]]</a>
+                <a th:href="@{/member/join}"><i class="xi-user-plus"></i>[[#{member.join}]]</a>
             </div>
         </form>
     </main>

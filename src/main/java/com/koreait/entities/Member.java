@@ -10,8 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@Builder @NoArgsConstructor @AllArgsConstructor
+@Data @Builder
+@NoArgsConstructor @AllArgsConstructor
 public class Member extends BaseEntity{
 
     @Id @GeneratedValue
@@ -28,6 +28,7 @@ public class Member extends BaseEntity{
 
     @Column(length = 100, nullable = false)
     private String email; // 이메일
+
     private String mobile; // 휴대전화번호
 
     private String termsAgree; // 약관 동의 내역
