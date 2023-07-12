@@ -21,10 +21,16 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         try{
             if (userId == null || userId.isBlank()){
-
+                throw new LoginValidationException("userId","NotBlank.userId");
             }
 
-            if (userPw == null )
+            if (userPw == null || userPw.isBlank()){
+                throw new LoginValidationException("userPw","NotBlank.userPw");
+            }
+
+            throw new LoginValidationException("global","validation.login.fail");
+        }catch(LoginValidationException e){
+            session.setAttribute(e.getField(),e.getMessage());
         }
     }
 }
