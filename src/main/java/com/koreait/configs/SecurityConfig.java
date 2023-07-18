@@ -42,13 +42,13 @@ public class SecurityConfig {
         // 관리자 페이지 들어갈 때, 복잡한 절차를 거치지 않고, 정해진 URL 로만 들어 갈 수 있게끔!
         http.exceptionHandling().authenticationEntryPoint((req, res, e) ->{
             String URI = req.getRequestURI();
-            String redirectURL = req.getRequestURI();
             if(URI.indexOf("/admin")!=-1){ //관리자 페이지
-                redirectURL +="/error/401"; //권한 없음
-            }else{
-                redirectURL +="/member/login"; //회원전용일때는 로그인으로 
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED); //접근 권한 없는 메세지 출력
+            }else{ //회원 전용 페이지 -> 로그인 하지 않고 회원 전용 페이지로 접근할시 로그인 페이지로 강제 이동!
+                String redirectURL = req.getContextPath()+"/member/login";
+                res.sendRedirect(redirectURL);
             }
-            res.sendRedirect(redirectURL);
+
         });
 
         http.headers().frameOptions().sameOrigin(); //같은 도메인에서만 iframe 내에 통신 가능하게 (보안을 위해)
