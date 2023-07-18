@@ -1,9 +1,7 @@
 package com.koreait.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.koreait.commons.constants.Role;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,8 +27,16 @@ public class Member extends BaseEntity{
     @Column(length = 100, nullable = false)
     private String email; // 이메일
 
+    @Column(length=11)
     private String mobile; // 휴대전화번호
 
+    @Lob
     private String termsAgree; // 약관 동의 내역
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 10, nullable = false)
+    private Role roles = Role.USER;
+
+
 
 }
