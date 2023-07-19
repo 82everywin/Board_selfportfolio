@@ -1,1 +1,8 @@
-Not Found 페이지가 없어요ㅠㅠ!!
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/front/main}">
+<main layout:fragment="content">
+    <th:block th:replace="~{error/_message::message}">페이지가 없습니다 NOT FOUND</th:block>
+</main>
+</html>

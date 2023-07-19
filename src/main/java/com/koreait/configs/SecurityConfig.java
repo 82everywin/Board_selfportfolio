@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .failureHandler(new LoginFailureHandler())
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("member/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/member/login");
 
         http.authorizeHttpRequests()
@@ -43,7 +43,7 @@ public class SecurityConfig {
         http.exceptionHandling().authenticationEntryPoint((req, res, e) ->{
             String URI = req.getRequestURI();
             if(URI.indexOf("/admin")!=-1){ //관리자 페이지
-                res.sendError(HttpServletResponse.SC_UNAUTHORIZED); //접근 권한 없는 메세지 출력
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "NOT AUTHORIZED"); //접근 권한 없는 메세지 출력
             }else{ //회원 전용 페이지 -> 로그인 하지 않고 회원 전용 페이지로 접근할시 로그인 페이지로 강제 이동!
                 String redirectURL = req.getContextPath()+"/member/login";
                 res.sendRedirect(redirectURL);
