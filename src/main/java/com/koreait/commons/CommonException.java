@@ -27,7 +27,6 @@ public class CommonException extends RuntimeException{
     }
     public CommonException (String message, HttpStatus httpStatus){
         super(message);
-
         this.httpStatus = httpStatus;
     }
 

@@ -1,6 +1,7 @@
 package com.koreait.controllers;
 
 import com.koreait.commons.CommonException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CommonController {
 
     @ExceptionHandler(Exception.class)
-    public String errorHandler(Exception e, Model model, HttpServletResponse response){
+    public String errorHandler(Exception e, Model model, HttpServletRequest request, HttpServletResponse response){
 
         int status = HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
         /**
@@ -22,10 +23,15 @@ public class CommonController {
 
         }
         response.setStatus(status);
+        String URL = request.getRequestURI();
+
 
         model.addAttribute("status",status);
+        model.addAttribute("path",URL);
         model.addAttribute("message",e.getMessage());
         model.addAttribute("exception",e);
+
+        e.printStackTrace(); //콘솔창으로 확인하기 위해 출력
 
         return "error/common";
     }

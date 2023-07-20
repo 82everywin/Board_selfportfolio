@@ -31,7 +31,7 @@
     	- status : HTTP 상태 코드
         - error : 오류 발생 원인
         - exception : 예외 객체
-        - errors : Errors 객체
+        - errors : Errors 객체 
         - trace : printStackTrace()
         - path : 오류의 유입 URL
   
@@ -39,9 +39,13 @@
 	- @ExceptionHandler, @ControllerAdvice , @RestControllerAdvice 
     - 
 
+* 공통 오류 페이지 처리
+	- 일반 컨트롤러(@ControllerAdvice)
+	- REST컨트롤러(@RestControllerAdvice)
+      - 일반 요청 응답과 오류 통일성 있게 처리(JSONData)
+      - 
 
 
-
--관리자페이지 
+* 관리자페이지 
 	- 기본설정
 	- 게시판 설정 
