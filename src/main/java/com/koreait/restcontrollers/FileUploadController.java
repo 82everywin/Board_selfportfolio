@@ -11,6 +11,6 @@ public class FileUploadController {
 
     @GetMapping("/file/upload")
     public void upload(){
-       
+
     }
 }

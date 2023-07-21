@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice("com.korea.it.controllers")
+@ControllerAdvice("com.koreait.controllers")
 public class CommonController {
 
     @ExceptionHandler(Exception.class)
