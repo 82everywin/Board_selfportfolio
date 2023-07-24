@@ -13,7 +13,7 @@
 
     <script th:src="@{/js/admin/common.js?v={v}(v=${cssJsVersion})}"></script>
     <script th:each="jsFile : ${addScript}"
-            th:src="@{/js/admin/{jsFile}.js?v={v}(jsFile=${jsFile}, v=${cssJsVersion})}"></script>
+            th:src="@{/js/admin/{jsFile}.js?v={v}(jsFile=${jsFile},v=${cssJsVersion})}"></script>
     <th:block layout:fragment="addScript"></th:block>
 </head>
 <body>
